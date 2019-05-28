@@ -1,0 +1,20 @@
+.product-image {
+  min-height: 200px;
+  max-height: 200px;
+}
+
+.btn-custom:hover {
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  background: #ea3737;
+  border-color: #ea3737;
+}
+
+.product-card {
+  max-height: 355px;
+  min-height: 355px;
+
+}
+
+.product-card:hover {
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}

@@ -1,0 +1,12 @@
+<nav class="navbar   nav-container">
+  <!-- Start of logo    -->
+  <img [routerLink]="'/home'" src="../../../assets/images/logo.png" alt="Logo" class="logo" />
+  <!-- End of logo    -->
+
+  <!-- Start of Cart image -->
+  <div class="cart">
+    <img [routerLink]="'/cart'" src="../../../assets/images/cart.png" class="cart" />
+    <span class="badge badge-primary">{{ localStorageCart.totalProduct }}</span>
+  </div>
+  <!-- End of Cart image  -->
+</nav>

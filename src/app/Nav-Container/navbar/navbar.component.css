@@ -1,0 +1,13 @@
+.logo {
+  height: 60px;
+  cursor: pointer;
+}
+
+.nav-container {
+  background: #a2e05a;
+}
+
+.cart {
+  height: 60px;
+  cursor: pointer;
+}
