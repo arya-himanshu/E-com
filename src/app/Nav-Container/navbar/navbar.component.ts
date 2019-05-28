@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Cart } from "src/app/Models/cart";
+import { ProductService } from "src/app/Product-Container/product.service";
 import { Subject } from "rxjs";
 
 @Component({
@@ -9,18 +10,18 @@ import { Subject } from "rxjs";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  constructor(private productService: ProductService) {}
   localStorageCart: Cart;
 
   ngOnInit() {
     this.localStorageCart = new Cart();
     this.localStorageCart.totalProduct = 0;
-    this.getLocalStorageCart();
+    this.productService
+      .getLocalStorageCartData()
+      .subscribe(data => this.getLocalStorageCart(data));
   }
 
-  getLocalStorageCart() {
-    if (localStorage.getItem("cart") != undefined) {
-      this.localStorageCart = JSON.parse(localStorage.getItem("cart"));
-    }
+  getLocalStorageCart(data) {
+    this.localStorageCart = data;
   }
 }

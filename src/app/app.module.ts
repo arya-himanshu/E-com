@@ -7,6 +7,7 @@ import { NavbarComponent } from "./Nav-Container/navbar/navbar.component";
 import { NgModule } from "@angular/core";
 import { ProductComponent } from "./Product-Container/product/product.component";
 import { CartComponent } from './Cart-Container/cart/cart.component';
+import { CartItemsComponent } from './Cart-Container/cart-items/cart-items.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CartComponent } from './Cart-Container/cart/cart.component';
     HomeComponent,
     NavbarComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    CartItemsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

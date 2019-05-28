@@ -12,6 +12,7 @@ import { Product } from "../Models/product";
 export class ProductService {
   constructor() {}
   private products = new BehaviorSubject<any>(0);
+  private localCart = new BehaviorSubject<any>(0);
 
   generateProductData(): Observable<Product> {
     let productsArray: Array<Product> = new Array();
@@ -50,6 +51,16 @@ export class ProductService {
         cart.totalProduct = 1;
         localStorage.setItem("cart", JSON.stringify(cart));
       }
+    }
+    this.getLocalStorageCartData();
+  }
+
+  getLocalStorageCartData(): Observable<Cart> {
+    if (localStorage.getItem("cart") != undefined) {
+      let cart = new Cart();
+      cart = JSON.parse(localStorage.getItem("cart"));
+      this.localCart.next(cart);
+      return this.localCart;
     }
   }
 }

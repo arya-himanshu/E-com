@@ -4,4 +4,6 @@ export class Product {
   price: number;
   isActive: boolean;
   productImage: string;
+  total: number;
+  quantity: number;
 }
