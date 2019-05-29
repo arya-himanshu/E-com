@@ -11,6 +11,7 @@ import { ProductService } from "src/app/Product-Container/product.service";
 export class CartComponent implements OnInit {
   constructor(private productService: ProductService) {}
   cart: Array<Cart> = new Array();
+
   ngOnInit() {
     this.getLocalStorageCart();
   }
@@ -21,6 +22,8 @@ export class CartComponent implements OnInit {
       .subscribe(data => this.setResponse(data));
   }
   setResponse(response) {
-    if (response != undefined) this.cart = response;
+    if (response != undefined && response.length > 0) {
+      this.cart = response;
+    }
   }
 }

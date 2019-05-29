@@ -20,6 +20,8 @@ export class NavbarComponent implements OnInit {
   }
 
   getLocalStorageCart(data) {
-    if (data != undefined) this.localStorageCart = data;
+    if (data != undefined) {
+      this.localStorageCart = data;
+    }
   }
 }
