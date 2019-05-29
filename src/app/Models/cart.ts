@@ -1,7 +1,11 @@
 import { Product } from "./product";
 
 export class Cart {
-  totalProduct: number;
-  totalAmount: number;
-  products: Array<Product>;
+  productId: number;
+  productName: string;
+  quantity: number;
+  price: number;
+  isActive: boolean;
+  productImage: string;
+  total: number;
 }

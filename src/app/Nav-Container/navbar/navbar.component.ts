@@ -11,17 +11,15 @@ import { Subject } from "rxjs";
 })
 export class NavbarComponent implements OnInit {
   constructor(private productService: ProductService) {}
-  localStorageCart: Cart;
+  localStorageCart: Array<Cart> = new Array();
 
   ngOnInit() {
-    this.localStorageCart = new Cart();
-    this.localStorageCart.totalProduct = 0;
     this.productService
       .getLocalStorageCartData()
       .subscribe(data => this.getLocalStorageCart(data));
   }
 
   getLocalStorageCart(data) {
-    this.localStorageCart = data;
+    if (data != undefined) this.localStorageCart = data;
   }
 }

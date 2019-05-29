@@ -5,12 +5,13 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { Cart } from "../Models/cart";
 import { Injectable } from "@angular/core";
 import { Product } from "../Models/product";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProductService {
-  constructor() {}
+  constructor(private router: Router) {}
   private products = new BehaviorSubject<any>(0);
   private localCart = new BehaviorSubject<any>(0);
 
@@ -30,36 +31,61 @@ export class ProductService {
   }
 
   addProductToCart(product: Product) {
+    let localStorageCart: Array<Cart> = new Array();
+
     if (product != undefined) {
       if (localStorage.getItem("cart") != undefined) {
-        let localStorageCart: Cart;
-        let cart = new Cart();
-        cart.products = new Array();
         localStorageCart = JSON.parse(localStorage.getItem("cart"));
-        cart.totalAmount = localStorageCart.totalAmount + product.price;
-        cart.totalProduct = localStorageCart.totalProduct + 1;
-        localStorageCart.products.push(product);
-        for (let pro of localStorageCart.products) {
-          cart.products.push(pro);
+        let cartObj = new Cart();
+        for (let cr of localStorageCart) {
+          if (cr.productId == product.id) {
+            cr.quantity += 1;
+            cr.total = cr.total + product.price;
+            localStorage.setItem("cart", JSON.stringify(localStorageCart));
+            this.navigateTo("/cart");
+            return;
+          }
         }
-        localStorage.setItem("cart", JSON.stringify(cart));
+        this.setLocalStorage(localStorageCart, product);
+        this.navigateTo("/cart");
       } else {
-        let cart = new Cart();
-        cart.products = new Array();
-        cart.products.push(product);
-        cart.totalAmount = product.price;
-        cart.totalProduct = 1;
-        localStorage.setItem("cart", JSON.stringify(cart));
+        this.setLocalStorage(localStorageCart, product);
+        this.navigateTo("/cart");
       }
     }
     this.getLocalStorageCartData();
   }
 
+  navigateTo(path: string) {
+    this.router.navigate([path]);
+  }
+
+  setLocalStorage(localStorageCart, product) {
+    localStorageCart.push(this.setCart(product));
+    localStorage.setItem("cart", JSON.stringify(localStorageCart));
+  }
+
+  setCart(product) {
+    let cartObj = new Cart();
+    cartObj.productId = product.id;
+    cartObj.price = product.price;
+    cartObj.productImage = product.productImage;
+    cartObj.productName = product.productName;
+    cartObj.quantity = 1;
+    cartObj.total = product.price;
+    return cartObj;
+  }
+
   getLocalStorageCartData(): Observable<Cart> {
-    if (localStorage.getItem("cart") != undefined) {
-      let cart = new Cart();
+    if (
+      localStorage.getItem("cart") != undefined &&
+      localStorage.getItem("cart").length > 0
+    ) {
+      let cart: Array<Cart> = new Array();
       cart = JSON.parse(localStorage.getItem("cart"));
       this.localCart.next(cart);
+      return this.localCart;
+    } else {
       return this.localCart;
     }
   }
