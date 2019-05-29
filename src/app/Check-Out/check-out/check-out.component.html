@@ -1,0 +1,27 @@
+<div class="main-container">
+  <ngb-tabset #t="ngbTabset">
+    <ngb-tab id="tab-selectbyid1" title="Personal Details">
+      <ng-template ngbTabContent>
+        <app-check-out-step1 [placeOrderObj]="placeOrderObj" [t]="t"></app-check-out-step1>
+        <button [disabled]="true" (click)="t.select('tab-selectbyid2')">
+          next
+        </button>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-selectbyid2" title="Delivery Address">
+      <ng-template ngbTabContent>
+        <app-check-out-step2></app-check-out-step2>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Order Summary">
+      <ng-template ngbTabContent>
+        <app-cart-items></app-cart-items>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Payment Options">
+      <ng-template ngbTabContent>
+        <app-check-out-final-step></app-check-out-final-step>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

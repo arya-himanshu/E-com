@@ -1,0 +1,24 @@
+<form [formGroup]="personalDetails" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Enter Name</label>
+    <input type="text" formControlName="name" [(ngModel)]="placeOrderObj.name" class="form-control"
+      placeholder="Enter Name"
+      [ngClass]="{ 'is-invalid': personalDetails.controls.name.touched &&  personalDetails.controls.name.invalid }" />
+  </div>
+  <div class="form-group">
+    <label for="">Email address</label>
+    <input type="email" formControlName="email" [(ngModel)]="placeOrderObj.email" class="form-control"
+      placeholder="Enter Email"
+      [ngClass]="{ 'is-invalid': personalDetails.controls.email.touched &&  personalDetails.controls.email.invalid }" />
+  </div>
+  <div class="form-group">
+    <label for="">Mobile</label>
+    <input type="email" class="form-control" formControlName="mobile" [(ngModel)]="placeOrderObj.mobile"
+      placeholder="Enter Mobile"
+      [ngClass]="{ 'is-invalid': personalDetails.controls.mobile.touched &&  personalDetails.controls.mobile.invalid }" />
+  </div>
+  <button type="submit" class="btn btn-primary float-right" [disabled]=" personalDetails.invalid"
+    (click)="t.select('tab-selectbyid2')">
+    Next
+  </button>
+</form>

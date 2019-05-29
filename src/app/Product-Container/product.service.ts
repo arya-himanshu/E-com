@@ -30,7 +30,7 @@ export class ProductService {
     return this.products;
   }
 
-  addProductToCart(product: Product) {
+  addProductToCart(product: Product, path: string) {
     let localStorageCart: Array<Cart> = new Array();
 
     if (product != undefined) {
@@ -42,15 +42,15 @@ export class ProductService {
             cr.quantity += 1;
             cr.total = cr.total + product.price;
             localStorage.setItem("cart", JSON.stringify(localStorageCart));
-            this.navigateTo("/cart");
+            this.navigateTo(path);
             return;
           }
         }
         this.setLocalStorage(localStorageCart, product);
-        this.navigateTo("/cart");
+        this.navigateTo(path);
       } else {
         this.setLocalStorage(localStorageCart, product);
-        this.navigateTo("/cart");
+        this.navigateTo(path);
       }
     }
     this.getLocalStorageCartData();
