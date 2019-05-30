@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 import { Cart } from "src/app/Models/cart";
+import { PlaceOrder } from "src/app/Models/placeOrder";
 
 @Component({
   selector: "app-cart-items",
@@ -11,6 +12,7 @@ export class CartItemsComponent implements OnInit {
   @Input() cartItem: Array<Cart> = new Array();
   total: number;
   totalQuantity: number;
+  @Input() t: any;
   constructor() {}
 
   ngOnInit() {

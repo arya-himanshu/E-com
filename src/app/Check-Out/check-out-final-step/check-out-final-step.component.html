@@ -1,3 +1,20 @@
-<p>
-  check-out-final-step works!
-</p>
+<form [formGroup]="paymentMethod" (ngSubmit)="onSubmit()">
+  <div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" formControlName="paymentOption" name="paymentOption"
+      id="customRadio1" value="Credit Card" [(ngModel)]="placeOrderObj.paymentOption" />
+    <label class="custom-control-label" for="customRadio1">Credit Card</label>
+  </div>
+  <div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" name="paymentOption" id="customRadio2"
+      formControlName="paymentOption" value="Net Banking" [(ngModel)]="placeOrderObj.paymentOption" />
+    <label class="custom-control-label" for="customRadio2">Net Banking</label>
+  </div>
+  <div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" name="paymentOption" id="customRadio3"
+      formControlName="paymentOption" value="COD" [(ngModel)]="placeOrderObj.paymentOption" />
+    <label class="custom-control-label" for="customRadio3">Cash on Delivery</label>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="t.select('tab-selectbyid3')">Prev</button>
+
+  <button type="button" class="btn btn-primary float-right" [disabled]=" paymentMethod.invalid">Confirm Order</button>
+</form>

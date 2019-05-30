@@ -25,11 +25,10 @@ export class CheckOutStep1Component implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.personalDetails);
     if (this.personalDetails.invalid) {
-      this.placeOrderObj.activeSteps.stepOne = true;
+      this.placeOrderObj.activeSteps.stepTwo = false;
     } else {
-      this.placeOrderObj.activeSteps.stepOne = false;
+      this.placeOrderObj.activeSteps.stepTwo = true;
     }
     console.log(this.placeOrderObj);
   }

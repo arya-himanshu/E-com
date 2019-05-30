@@ -14,6 +14,7 @@ export class ProductService {
   constructor(private router: Router) {}
   private products = new BehaviorSubject<any>(0);
   private localCart = new BehaviorSubject<any>(0);
+  productImages = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"];
 
   generateProductData(): Observable<Product> {
     let productsArray: Array<Product> = new Array();
@@ -22,7 +23,10 @@ export class ProductService {
       productObj.id = i;
       productObj.isActive = true;
       productObj.price = faker.random.number();
-      productObj.productImage = faker.image.technics();
+      productObj.productImage =
+        "../../../assets/images/" +
+        this.productImages[this.getRandomInt(0, 7)] +
+        ".jpeg";
       productObj.productName = faker.commerce.productName();
       productsArray.push(productObj);
     }
@@ -88,5 +92,11 @@ export class ProductService {
     } else {
       return this.localCart;
     }
+  }
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
