@@ -1,26 +1,32 @@
+<!-- start of address details form -->
 <form [formGroup]="addressDetails">
   <div class="form-group">
     <label>Address</label>
     <input type="text" formControlName="address" [(ngModel)]="placeOrderObj.address" class="form-control"
-      placeholder="Enter Address" />
+      placeholder="Enter Address"
+      [ngClass]="{ 'is-invalid': addressDetails.controls.address.touched &&  addressDetails.controls.address.invalid }" />
   </div>
   <div class="form-group">
     <label>Pin Code</label>
     <input type="text" formControlName="pinCode" [(ngModel)]="placeOrderObj.pinCode" class="form-control"
-      placeholder="Enter Pin Code" />
+      placeholder="Enter Pin Code"
+      [ngClass]="{ 'is-invalid': addressDetails.controls.pinCode.touched &&  addressDetails.controls.pinCode.invalid }" />
   </div>
   <div class="form-group">
     <label>City</label>
     <input type="text" formControlName="city" [(ngModel)]="placeOrderObj.city" class="form-control"
-      placeholder="Enter City" />
+      placeholder="Enter City"
+      [ngClass]="{ 'is-invalid': addressDetails.controls.city.touched &&  addressDetails.controls.city.invalid }" />
   </div>
   <div class="form-group">
     <label>State</label>
     <input type="text" formControlName="state" [(ngModel)]="placeOrderObj.state" class="form-control"
-      placeholder="Enter State" (change)="onSubmit()" />
+      placeholder="Enter State" (change)="onSubmit()"
+      [ngClass]="{ 'is-invalid': addressDetails.controls.state.touched &&  addressDetails.controls.state.invalid }" />
   </div>
   <button type="button" class="btn btn-primary" (click)="t.select('tab-selectbyid1')">Prev</button>
 
   <button type="button" class="btn btn-primary float-right" (click)="t.select('tab-selectbyid3')"
     [disabled]=" addressDetails.invalid">Next</button>
 </form>
+<!-- end of address details form -->

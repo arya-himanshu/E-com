@@ -14,6 +14,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {}
 
+  // by calling this function we can add prodcut to cart and redirect to cart
   addToCart(product, path) {
     this.productService.addProductToCart(product, path);
   }

@@ -16,20 +16,20 @@ export class CheckOutStep1Component implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    console.log(this.placeOrderObj);
-
+    // init form
+    this.placeOrderObj.email = "aryahimanshu093@gmail.com";
     this.personalDetails = this.formBuilder.group({
       name: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
       mobile: ["", [Validators.required, Validators.minLength(10)]]
     });
   }
+  // submit form
   onSubmit() {
     if (this.personalDetails.invalid) {
       this.placeOrderObj.activeSteps.stepTwo = false;
     } else {
       this.placeOrderObj.activeSteps.stepTwo = true;
     }
-    console.log(this.placeOrderObj);
   }
 }

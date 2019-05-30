@@ -1,5 +1,14 @@
 <div class="main-container">
+
+  <!-- including cart item component -->
   <app-cart-items [cartItem]="cart"></app-cart-items>
+  <!-- End of including cart item component -->
+
+  <!-- To navigate checkout and home page -->
   <button [routerLink]="['/check-out']" routerLinkActive="router-link-active" type="button"
-    class="btn  float-right btn-danger  ">Check Out</button>
+    class="btn  float-right btn-danger  ">Check Out</button><button [routerLink]="['/home']" type="button"
+    class="btn  float-right btn-danger  mr-5">Continue Shopping
+  </button>
+  <!-- End To navigate checkout and home page -->
+
 </div>

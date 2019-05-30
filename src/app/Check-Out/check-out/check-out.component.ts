@@ -14,6 +14,7 @@ export class CheckOutComponent implements OnInit {
   constructor(private route: Router) {}
 
   ngOnInit() {
+    // init PlaceOrder obj
     this.placeOrderObj = new PlaceOrder();
     this.placeOrderObj.activeSteps = new ActiveWizardStep();
     this.placeOrderObj.cartItem = new Array();

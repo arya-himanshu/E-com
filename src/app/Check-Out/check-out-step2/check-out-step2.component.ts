@@ -27,12 +27,14 @@ export class CheckOutStep2Component implements OnInit {
     this.getCurrenLocation();
   }
 
+  // getting user current location
   getCurrenLocation() {
     this.http
       .get<any>("https://geoip-db.com/json/")
       .subscribe(data => this.setCurrentAddress(data));
   }
 
+  // set current user location
   setCurrentAddress(response) {
     this.placeOrderObj.city = response.city;
     this.placeOrderObj.state = response.state;
@@ -43,6 +45,7 @@ export class CheckOutStep2Component implements OnInit {
     }, 100);
   }
 
+  // form init
   formInit() {
     this.addressDetails = this.formBuilder.group({
       address: ["", Validators.required],
@@ -51,6 +54,7 @@ export class CheckOutStep2Component implements OnInit {
       state: ["", [Validators.required]]
     });
   }
+  // submmit form
   onSubmit() {
     if (this.addressDetails.invalid) {
       if (

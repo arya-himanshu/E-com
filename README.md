@@ -1,3 +1,35 @@
+#Note
+
+Run server : ng serve --o .
+
+Url : http://localhost:4200/home.
+
+Screen Flows :
+
+1.) Open url-> http://localhost:4200/home.
+2.) Click on add to cart button to add product to cart.
+3.) After click on add to cart it will redirect to cart page as given in documentation.
+4.) In cart page you can checkout from there itself.
+5.) Checkout page has four step of wizard to place order
+------ checkout wizard --------
+1.) Personal details every field is mandatory.
+2.) Address detalis here alse every field is mandatory.
+3.) Item list.
+4.) Selet payment method , After click on confirm order , modal popups and show the receipt of order . after click on close it will redirect to home page.
+6.) You can directly buy from home clicking on buy.
+
+List of Components :
+
+1.) home component.
+2.) cart component.
+3.) cart item.
+4.) check-out component.
+5.) check-out-step1 component
+5.) check-out-step2 component
+5.) check-out-final-step component
+6.) navbar component.
+7.) product component.
+
 # ECom
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.

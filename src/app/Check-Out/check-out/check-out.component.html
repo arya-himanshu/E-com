@@ -1,30 +1,56 @@
+<!-- start of wizard -->
 <div class="main-container">
   <ngb-tabset #t="ngbTabset">
+
+    <!-- Start of first step of wizard -->
     <ngb-tab id="tab-selectbyid1" title="Personal Details">
       <ng-template ngbTabContent>
+        <!-- including first step component -->
         <app-check-out-step1 [placeOrderObj]="placeOrderObj" [t]="t"></app-check-out-step1>
+        <!-- including first step component -->
       </ng-template>
     </ngb-tab>
+    <!-- End of first step of wizard -->
+
+    <!-- Start of second step of wizard -->
     <ngb-tab id="tab-selectbyid2" title="Delivery Address" [disabled]="!placeOrderObj.activeSteps.stepTwo">
       <ng-template ngbTabContent>
+        <!-- including second step component-->
         <app-check-out-step2 [placeOrderObj]="placeOrderObj" [t]="t"></app-check-out-step2>
+        <!-- including second step component -->
       </ng-template>
     </ngb-tab>
+    <!-- End of Second step of wizard -->
+
+    <!-- Start of third step of wizard -->
     <ngb-tab title="Order Summary" id="tab-selectbyid3" [disabled]="!placeOrderObj.activeSteps.stepThree">
       <ng-template ngbTabContent>
+        <!-- including third step component-->
         <app-cart-items [cartItem]="placeOrderObj.cartItem" [t]="t"></app-cart-items>
+        <!-- including third step component-->
+        <!-- button to navigate -->
         <button type="button" class="  btn btn-primary  " (click)="t.select('tab-selectbyid2')">
           Prev
         </button>
         <button type="button" class="btn btn-primary float-right" (click)="t.select('tab-selectbyid4')">
           Next
         </button>
+        <!--end of navigate -->
+
       </ng-template>
     </ngb-tab>
+    <!-- End of third step of wizard -->
+
+    <!-- Start of final step of wizard -->
     <ngb-tab title="Payment Options" id="tab-selectbyid4" [disabled]="!placeOrderObj.activeSteps.finalStep">
       <ng-template ngbTabContent>
+        <!-- including final step component  -->
         <app-check-out-final-step [placeOrderObj]="placeOrderObj" [t]="t"></app-check-out-final-step>
+        <!-- including final step component -->
       </ng-template>
     </ngb-tab>
+    <!-- End of final step of wizard -->
+
   </ngb-tabset>
 </div>
+<!-- End of wizard -->

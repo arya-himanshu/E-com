@@ -1,4 +1,5 @@
-<form [formGroup]="paymentMethod" (ngSubmit)="onSubmit()">
+<!-- start of final step payment method form -->
+<form [formGroup]="paymentMethod">
   <div class="custom-control custom-radio">
     <input type="radio" class="custom-control-input" formControlName="paymentOption" name="paymentOption"
       id="customRadio1" value="Credit Card" [(ngModel)]="placeOrderObj.paymentOption" />
@@ -14,7 +15,124 @@
       formControlName="paymentOption" value="COD" [(ngModel)]="placeOrderObj.paymentOption" />
     <label class="custom-control-label" for="customRadio3">Cash on Delivery</label>
   </div>
-  <button type="button" class="btn btn-primary" (click)="t.select('tab-selectbyid3')">Prev</button>
+  <button type="button" class="btn btn-primary" (click)="t.select('tab-selectbyid3')">
+    Prev
+  </button>
 
-  <button type="button" class="btn btn-primary float-right" [disabled]=" paymentMethod.invalid">Confirm Order</button>
+  <button type="button" class="btn btn-primary float-right" (click)="confirmOrder(content)"
+    [disabled]="paymentMethod.invalid">
+    Confirm Order
+  </button>
 </form>
+<!-- end of final step payment method form -->
+
+
+<!-- receipt modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"
+      [routerLink]="['/home']">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="invoice-box">
+      <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+          <td colspan="3">
+            <table>
+              <tr>
+                <td class="title">
+                  <img src="../../../assets/images/logo.png" style="width:100%; max-width:250px;" />
+                </td>
+                <td>
+                  Invoice #: 123<br />
+                  Created: January 1, 2015<br />
+                  Due: February 1, 2015
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="information">
+          <td colspan="3">
+            <table>
+              <tr>
+                <td>
+                  Sparksuite, Inc.<br />
+                  {{ placeOrderObj.city }},<br />
+                  {{ placeOrderObj.state }}, {{ placeOrderObj.pinCode }}
+                </td>
+
+                <td>
+                  {{ placeOrderObj.name }}<br />
+                  {{ placeOrderObj.email }}<br />
+                  {{ placeOrderObj.mobile }}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="heading">
+          <td>
+            Payment Method
+          </td>
+          <td></td>
+          <td>
+            Check #
+          </td>
+        </tr>
+
+        <tr class="details font-weight-bold">
+          <td>
+            {{ placeOrderObj.paymentOption }}
+          </td>
+          <td></td>
+          <td>
+            {{ total }}
+          </td>
+        </tr>
+
+        <tr class="heading  ">
+          <td>
+            Item
+          </td>
+          <td>Quantity</td>
+          <td>
+            Price
+          </td>
+        </tr>
+
+        <tr class="item font-weight-bold" *ngFor="let item of placeOrderObj.cartItem">
+          <td>
+            {{ item.productName }}
+          </td>
+          <td>
+            {{ item.quantity }}
+          </td>
+          <td>
+            {{ item.price }}
+          </td>
+        </tr>
+
+        <tr class="total font-weight-bold">
+          <td></td>
+          <td>Total</td>
+
+          <td>
+            {{ total }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')" [routerLink]="['/home']">
+      Close
+    </button>
+  </div>
+</ng-template>
+<!-- receipt modal -->

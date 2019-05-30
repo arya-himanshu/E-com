@@ -16,11 +16,14 @@ export class CartComponent implements OnInit {
     this.getLocalStorageCart();
   }
 
+  // fetching data from localstorage
   getLocalStorageCart() {
     this.productService
       .getLocalStorageCartData()
       .subscribe(data => this.setResponse(data));
   }
+
+  // set data of localStorage
   setResponse(response) {
     if (response != undefined && response.length > 0) {
       this.cart = response;

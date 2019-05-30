@@ -12,8 +12,10 @@ import { Subject } from "rxjs";
 export class NavbarComponent implements OnInit {
   constructor(private productService: ProductService) {}
   localStorageCart: Array<Cart> = new Array();
-
   ngOnInit() {
+    this.getLocalStorageData();
+  }
+  getLocalStorageData() {
     this.productService
       .getLocalStorageCartData()
       .subscribe(data => this.getLocalStorageCart(data));
@@ -22,6 +24,8 @@ export class NavbarComponent implements OnInit {
   getLocalStorageCart(data) {
     if (data != undefined) {
       this.localStorageCart = data;
+    } else {
+      this.localStorageCart = [];
     }
   }
 }

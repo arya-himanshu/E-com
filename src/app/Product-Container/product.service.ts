@@ -13,9 +13,12 @@ import { Router } from "@angular/router";
 export class ProductService {
   constructor(private router: Router) {}
   private products = new BehaviorSubject<any>(0);
-  private localCart = new BehaviorSubject<any>(0);
+  private globalCart = new BehaviorSubject<any>(0);
+
+  // local images Array
   productImages = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"];
 
+  // This bit is generating the product data by unsing faker
   generateProductData(): Observable<Product> {
     let productsArray: Array<Product> = new Array();
     for (let i = 1; i <= 20; i++) {
@@ -34,6 +37,7 @@ export class ProductService {
     return this.products;
   }
 
+  // This bit is for add product to cart
   addProductToCart(product: Product, path: string) {
     let localStorageCart: Array<Cart> = new Array();
 
@@ -60,15 +64,18 @@ export class ProductService {
     this.getLocalStorageCartData();
   }
 
+  // navigation function
   navigateTo(path: string) {
     this.router.navigate([path]);
   }
 
+  // This Bit is for set localStorage data
   setLocalStorage(localStorageCart, product) {
     localStorageCart.push(this.setCart(product));
     localStorage.setItem("cart", JSON.stringify(localStorageCart));
   }
 
+  // Commont function for set cart data
   setCart(product) {
     let cartObj = new Cart();
     cartObj.productId = product.id;
@@ -80,17 +87,20 @@ export class ProductService {
     return cartObj;
   }
 
+  // this bit is for get localStorage cart data
   getLocalStorageCartData(): Observable<Cart> {
+    let cart: Array<Cart> = new Array();
+
     if (
       localStorage.getItem("cart") != undefined &&
       localStorage.getItem("cart").length > 0
     ) {
-      let cart: Array<Cart> = new Array();
       cart = JSON.parse(localStorage.getItem("cart"));
-      this.localCart.next(cart);
-      return this.localCart;
+      this.globalCart.next(cart);
+      return this.globalCart;
     } else {
-      return this.localCart;
+      this.globalCart.next(cart);
+      return this.globalCart;
     }
   }
 
