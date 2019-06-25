@@ -1,6 +1,7 @@
 import * as faker from "faker";
 
 import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 import { Cart } from "../Models/cart";
 import { Injectable } from "@angular/core";
@@ -11,29 +12,37 @@ import { Router } from "@angular/router";
   providedIn: "root"
 })
 export class ProductService {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private httpService: HttpClient) {}
   private products = new BehaviorSubject<any>(0);
   private globalCart = new BehaviorSubject<any>(0);
-
-  // local images Array
-  productImages = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"];
+  productsArray: Array<Product> = new Array();
 
   // This bit is generating the product data by unsing faker
   generateProductData(): Observable<Product> {
-    let productsArray: Array<Product> = new Array();
-    for (let i = 1; i <= 20; i++) {
-      let productObj = new Product();
-      productObj.id = i;
-      productObj.isActive = true;
-      productObj.price = faker.random.number();
-      productObj.productImage =
-        "../../../assets/images/" +
-        this.productImages[this.getRandomInt(0, 7)] +
-        ".jpeg";
-      productObj.productName = faker.commerce.productName();
-      productsArray.push(productObj);
-    }
-    this.products.next(productsArray);
+    // let productsArray: Array<Product> = new Array();
+    // for (let i = 1; i <= 20; i++) {
+    //   let productObj = new Product();
+    //   productObj.id = i;
+    //   productObj.isActive = true;
+    //   productObj.price = faker.random.number();
+    //   productObj.productImage =
+    //     "../../../assets/images/" +
+    //     this.productImages[this.getRandomInt(0, 7)] +
+    //     ".jpeg";
+    //   productObj.productName = faker.commerce.productName();
+    //   productsArray.push(productObj);
+    // }
+    // this.products.next(productsArray);
+    this.httpService.get("../../assets/product.json").subscribe(
+      data => {
+        this.productsArray = data as Array<Product>;
+        this.products.next(this.productsArray);
+      },
+
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      }
+    );
     return this.products;
   }
 
@@ -76,12 +85,12 @@ export class ProductService {
   }
 
   // Commont function for set cart data
-  setCart(product) {
+  setCart(product: Product) {
     let cartObj = new Cart();
     cartObj.productId = product.id;
     cartObj.price = product.price;
-    cartObj.productImage = product.productImage;
-    cartObj.productName = product.productName;
+    cartObj.productImage = product.imageUrl;
+    cartObj.productName = product.name;
     cartObj.quantity = 1;
     cartObj.total = product.price;
     return cartObj;

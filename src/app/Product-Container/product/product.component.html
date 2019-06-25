@@ -1,8 +1,8 @@
 <div class="row  ml-0 mr-0" *ngIf="products.length > 0">
   <div class="col-md-3" *ngFor="let product of products">
     <div class="card mb-4 text text-center rounded-0 product-card">
-      <img [src]="product.productImage" class="product-image">
-      <p [title]="product?.productName" class="default-font-color">{{product?.productName.slice(0,21)}}</p>
+      <img [alt]="product?.name" class="product-image">
+      <p [title]="product?.name" class="default-font-color">{{product?.name.slice(0,21)}}</p>
       <p [title]="product?.price" class="default-font-color">{{product?.price}}</p>
       <div class="d-flex pl-3 pr-3 pb-3">
         <button type="button" class="btn btn-primary  rounded-0 btn-custom" (click)="addToCart(product,'/cart')">Add

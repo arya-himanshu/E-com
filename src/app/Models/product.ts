@@ -1,8 +1,13 @@
 export class Product {
   id: number;
-  productName: string;
+  name: string;
   price: number;
-  isActive: boolean;
-  productImage: string;
-  quantity: number;
+  subCategoryId: number;
+  categoryId: number;
+  rate: number;
+  content: string;
+  review: number;
+  typeVariant: string;
+  colorVariant: string;
+  imageUrl: string;
 }
